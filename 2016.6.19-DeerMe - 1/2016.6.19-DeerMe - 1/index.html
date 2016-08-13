@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="gb2312">
+		<title>DeerMe培训平台</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">		
+		<link rel="stylesheet" href="css/slider.css" type="text/css">
+		<link rel="stylesheet" href="css/index.css" type="text/css">
+		<link rel="stylesheet" href="css/rightfix.css" type="text/css">
+		<link rel="stylesheet" href="css/teachershow.css" type="text/css">
+		<link rel="stylesheet" href="css/navfixed.css" type="text/css">
+		
+		<script src="js/jquery-1.8.1.min.js"></script>
+		<script src="js/jquery.flexslider-min.js"></script>
+		<script src="js/index.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('#onregist').on('click', function () {
+					window.location.href = 'regist.html';
+				})
+			});
+			
+			function loginsubmit(){
+				var ischeckok="0";//输入验证标识
+				var ismobile = /^((\(\d{3}\))|(\d{3}\-))?13\d{9}|14[57]\d{8}|15\d{9}|18\d{9}$/;
+				if(($("#inputname").val()=="") || ($("#inputname").val()==null) || 
+				($.trim($("#inputname").val().replace(/[ ]/g,"")) != $("#inputname").val())){
+					$('#tooltip-inputname').tooltip('show');
+				}else{
+					if(($("#inputmobile").val()=="") || ($("#inputmobile").val()==null) ||
+						($.trim($("#inputmobile").val().replace(/[ ]/g,"")) != $("#inputmobile").val()) ||
+						($("#inputmobile").val().length!=11 || !$("#inputmobile").val().match(ismobile))){
+						$('#tooltip-inputmobile').tooltip('show');
+					}else{
+						if(($("#inputpassword").val()=="") || ($("#inputpassword").val()==null) ||
+						($.trim($("#inputpassword").val().replace(/[ ]/g,"")) != $("#inputpassword").val()) ||
+						($("#inputpassword").val().length<6) || ($("#inputpassword").val().length>20)){
+						$('#tooltip-inputmobile').tooltip('show');
+						}else{
+							ischeckok="1";
+						}
+					}
+				}
+				if(ischeckok == "1"){
+					$.ajax( {
+						type : 'post',
+						url : '###',
+						data : {
+							inputname:$("#inputname").val(),
+							inputmobile:$("#inputmobile").val(),
+							inputpassword:$("#inputpassword").val()
+						},
+						cache : false,
+						dataType : 'html', //xml,json,script,html
+						success : function(data) {
+							if(data == "insertok"){
+								//###
+							}
+						},
+						error : function() {
+							alert("index.html(ajax)出bug啦！");
+						}
+					}); 
+				}
+			}
+			
+		</script>
+	</head>
+
+	<body>
+		<div class="top-tip">
+			<div class="top-tip-container">
+				<div class="top-tip-rl" style="margin-top:-2px;margin-right:10px">
+					<button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#loginModal">登录</button>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="btn btn-default btn-sm" id="onregist">注册</button>
+					<!--a class="top-tip-rl-a" href="#"><b>注册</b></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="top-tip-rl-a" href="#"><b>登录</b></a>-->
+				</div>
+			</div>
+		</div>
+		<!-- 模态框（Modal） -->
+		<div class="modal fade bs-example-modal-sm" id="loginModal" tabindex="-1" role="dialog" 
+		   aria-labelledby="myModalLabel" aria-hidden="true" >
+		    <div class="modal-dialog modal-sm" style="width:500px;margin-top:200px">
+		        <div class="modal-content" >
+		            <div class="modal-header">
+			            <button type="button" class="close" 
+			               data-dismiss="modal" aria-hidden="true">
+			                  &times;
+			            </button>
+			            <h5 class="modal-title" id="myModalLabel">
+		              		 <b>登录DeerMe</b>
+			            </h5>
+		         	</div><br><br>
+			        <div class="input-group" style="width:100%;padding-left:20px;padding-right:20px">
+					    <span class="input-group-addon" id="basic-addon1" style="width:15%"><span class="glyphicon glyphicon-phone"></span></span>
+					    <input type="text" name="u_name" class="form-control" placeholder="请输入您的手机号码" aria-describedby="basic-addon1">
+					</div><br><br>
+					<div class="input-group" style="width:100%;padding-left:20px;padding-right:20px">
+					    <span class="input-group-addon" id="basic-addon1" style="width:15%"><span class="glyphicon glyphicon-lock"></span></span>
+					    <input type="password" name="u_password" class="form-control" placeholder="请输入您的登录密码" aria-describedby="basic-addon1">
+					</div><br>
+					<div class="checkbox" style="width:100%;padding-left:20px;padding-right:20px">
+						<label>
+							<input type="checkbox">下次自动登录
+						</label>
+						<label>
+							<a style="margin-left:50px">忘记密码？</a>
+						</label>
+				    </div><br>				
+			        <div style="width:100%;padding-left:20px;padding-right:20px;padding-bottom:20px">        
+						<button type="submit" class="btn btn-danger" style="width:100%">登录</button>							
+			        </div>
+		        </div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+		</div>
+		<div class="header">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#"><img src="img/logo.png"></a>
+				</div>
+				<div class="collapse navbar-collapse navbar-responsive-collapse navbar-right nav-right">
+					<ul class="nav navbar-nav" id="navbar">
+						<li><a class="active" href="#">首页</a></li>
+						<li><a href="#">公开课</a></li>
+						<li><a href="#">课程体系</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<center>
+			<div class="flex-container">
+				<div class="flexslider">
+					<ul class="slides">
+						<li>
+							<img src="img/slide1.jpg" />
+							<div style="position:absolute; top:170px; left:165px; width:420px;  background:#333; opacity:.5; color:#fff">
+								<p style="padding:10px">FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。<br><a href="http://www.helloweba.com/view-blog-265.html" target="_blank">中文使用教程</a></p>
+							</div>
+						</li>			
+						<li>
+							<img src="img/slide2.jpg" />
+							<div style="position:absolute; top:470px; left:290px; width:420px;  background:#333; opacity:.5; color:#fff">
+								<p style="padding:10px">FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。<br><a href="http://www.helloweba.com/view-blog-265.html" target="_blank">中文使用教程</a></p>
+							</div>
+						</li>			
+						<li>
+							<img src="img/slide3.jpg" />
+							<div style="position:absolute; top:150px; right:65px; width:420px;  background:#333; opacity:.5; color:#fff">
+								<p style="padding:10px">FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。<br><a href="http://www.helloweba.com/view-blog-265.html" target="_blank">中文使用教程</a></p>
+							</div>
+						</li>
+						<li>
+							<img src="img/slide4.jpg" />
+							<div style="position:absolute; top:530px; right:65px; width:420px;  background:#333; opacity:.5; color:#fff">
+								<p style="padding:10px">FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。
+								FlexSlider是一款基于的jQuery内容滚动插件。它能让你轻松的创建内容滚动的效果，具有非常高的可定制性。<br><a href="http://www.helloweba.com/view-blog-265.html" target="_blank">中文使用教程</a></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</center>
+				
+		<div class="jumbotron" style="text-align:center;background:#ff6666;">
+		    <div class="container" >
+			    <h3>It's easy to have a lesson with a teacher.</h3>			 
+		    </div>
+		</div>
+		
+		<!--我们的优势-->
+		<div id="advantage-unit" style="height:980px;background-color:#ffffff;">
+			<div class="unit-header">
+			    <h2>我们的优势</h2>
+			</div>
+			<div>
+			    <ul style="width:1130px;margin:0 auto;">
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff">
+						<img src="img/advantage1.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">强大的北美外教团队：</h4>
+						<p style="padding:10px">全美国和加拿大外籍外教，北美名校毕业。持有全球认证的国际英语教学资格证书，具有丰富的少儿ESL教学经验，部分老师本省就是美国小学和国际学校的在职老师，实现真正的北美名师资源共享。</p>
+					</li>
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff;margin-left:40px">
+						<img src="img/advantage2.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">线上一对一真人授课：</h4>
+						<p style="padding:10px">北美外教一对一线上授课，100%沉浸式英语教学环境；课程时间自由安排，灵活定制，借助先进的网络授课工具，足不出户，便可把北美名师“请回家”。</p>
+					</li>
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff;margin-left:40px">
+						<img src="img/advantage3.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">国际最为主流的CLIL教学法：</h4>
+						<p style="padding:10px">采用先进的“内容和语言整合学习法”（CLIL），以学科知识为背景，以英语为媒介，将语言学习和学科知识结合在一起，孩子不仅能学好英语语言，同事还学会用英语了解数学、自然科学、艺术等学科知识。</p>
+					</li>		
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff;margin-top:40px;">
+						<img src="img/advantage4.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">同步美国小学标准：</h4>
+						<p style="padding:10px">课程体系基于全美教育标准CCSS，同美国小学课程无缝连接；所用教材由DeerMe独家研发，在美国主流小学教材基础之上，结合英语非母语学生的学习特点加以编排，更加符合亚洲学生的学习习惯。</p>
+					</li>
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff;margin-top:40px;margin-left:40px">
+						<img src="img/advantage5.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">强大的网络上课平台：</h4>
+						<p style="padding:10px">高清流畅的网络视频传输和语音互动，带来不输于真实课堂的上课体验；课程结束，自动录播，家长可通过课程回放随时了解孩子的课堂表现。</p>
+					</li>
+					<li class="advantage-li" style="float:left;width:320px;height:380px;list-style:none;background-color:#f2f2f2;border:2px solid #99ccff;margin-top:40px;margin-left:40px">
+						<img src="img/advantage6.jpg" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">专业的中文助教团队：</h4>
+						<p style="padding:10px">每名学生配有一位中文助教，助教团队均为英语专业8级或海外留学经验，助教负责为学生进行课后巩固和定期测评，为家长答疑解惑。</p>
+					</li>
+			    </ul>				
+			</div>
+			<div style="text-align:center;padding-top:830px">
+				<button type="button" class="btn btn-danger btn-lg">免费预约体验课 ></button>
+			</div>
+		</div>
+		<!--我们的优势-->
+		
+		<!--我们的外教团队-->
+		<div id="teacher-unit" style="height:550px;background-color:#f2f2f2">
+			<div class="unit-header">
+			    <h2 style="padding-top:30px">我们的外教团队</h2>
+				<p>我们的外教全部来自北美英语国家，100%本科学历之上，均持有TESOL和TEFL等<br>
+				全球认证的国际英语教学资格证书，具有丰富的ESL教学经验和北美小学任教资质。</p>
+			</div>
+			<div style="text-align:center">
+				<ul class="pictureshow">
+					<li style="margin-left:-20px">
+						<div class="boxgrid slidedown" id="boxgrid1">
+							<img src="img/teacher1.jpg" width="280" height="280" class="cover" style="top: 0px;">
+							<h3>
+								<b>Tommy.T</b>
+							</h3>
+							<p style="padding:10px">Tommy.T毕业于英国Warwick大学，并获得理学（经济类）学士，拥有原汁原味伦敦口音的英国绅士。</p>
+						</div>
+					</li>
+					<li>
+						<div class="boxgrid slidedown" id="boxgrid2">
+							<img src="img/teacher2.jpg" width="280" height="280" class="cover" style="top: 0px;">
+							<h3>
+								<b>Hellen.J</b>
+							</h3>
+							<p style="padding:10px">Hellen.J毕业于英国Warwick大学，并获得理学（经济类）学士，拥有原汁原味伦敦口音的英国绅士。</p>
+						</div>
+					</li>
+					<li>
+						<div class="boxgrid slidedown" id="boxgrid3">
+							<img src="img/teacher3.jpg" width="280" height="280" class="cover" style="top: 0px;">
+							<h3>
+								<b>Carrie.S</b>
+							</h3>
+							<p style="padding:10px">Carrie.S毕业于英国Warwick大学，并获得理学（经济类）学士，拥有原汁原味伦敦口音的英国绅士。</p>
+						</div>
+					</li>
+					<li>
+						<div class="boxgrid slidedown" id="boxgrid4">
+							<img src="img/teacher4.jpg" width="280" height="280" class="cover" style="top: 0px;">
+							<h3>
+								<b>Gabriel</b>
+							</h3>
+							<p style="padding:10px">Gabriel毕业于英国Warwick大学，并获得理学（经济类）学士，拥有原汁原味伦敦口音的英国绅士。</p>
+						</div>
+					</li>
+					<li style="text-align:center;height:100px;">
+						<h3>
+							<b>Tommy.T&nbsp;&nbsp;</b>
+						</h3>
+					</li>
+					<li style="text-align:center;height:100px;">
+						<h3>
+							<b>Hellen.J&nbsp;&nbsp;</b>
+						</h3>
+					</li>
+					<li style="text-align:center;height:100px;">
+						<h3>
+							<b>Carrie.S&nbsp;&nbsp;</b>
+						</h3>
+					</li>
+					<li style="text-align:center;height:100px;">
+						<h3>
+							<b>Gabriel&nbsp;&nbsp;</b>
+						</h3>
+					</li>
+					<div class="cle"></div>
+				</ul>
+			</div>
+		</div>
+		<!--我们的外教团队-->
+		
+		<!--课程级别-->
+		<div id="course-unit" style="height:600px;background-color:#ffffff;">
+			<div class="unit-header">
+			    <h2 style="padding-top:20px">课程级别</h2>
+				<p>同步美国小学标准，根据一对一测评结果，选择合适级别的课程。</p>
+			</div>
+			<div style="text-align:center;padding-top:40px">
+			    <img src="img/course.jpg" /><br><br><br>
+				<button type="button" class="btn btn-danger btn-lg">免费预约体验课 ></button>
+			</div>
+			
+		</div>
+		<!--课程级别-->
+		
+		<!--教学质量管理体系-->
+		<div id="teachingquality-unit" style="height:650px;background-color:#f2f2f2;">
+			<div class="unit-header">
+			    <h2 style="padding-top:30px">教学质量管理体系</h2>
+			</div>
+			<div>
+			    <ul style="width:1130px;margin:0 auto;">
+					<li style="float:left;width:250px;height:400px;list-style:none;background-color:#ffffff;margin-left:-18px">
+						<img src="img/teaching1.png" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">入学前水平测试，确定课程级别</h4>
+					</li>
+					<li style="float:left;width:250px;height:400px;list-style:none;background-color:#ffffff;margin-left:30px">
+						<img src="img/teaching2.png" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">根据学生学习情况，制定个性化学习方案</h4>
+					</li>
+					<li style="float:left;width:250px;height:400px;list-style:none;background-color:#ffffff;margin-left:30px">
+						<img src="img/teaching3.png" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">每次上课后，外教及时给予教学反馈，家长可获得孩子的一手学习情况；同事学生可对外教进行评分，提出建议</h4>
+					</li>
+					<li style="float:left;width:250px;height:400px;list-style:none;background-color:#ffffff;margin-left:30px">
+						<img src="img/teaching4.png" class="img-rounded" style="padding:10px">
+						<h4 style="margin-left:20px">教学督导团队对学生学习进度和效果进行评估，结合学生家长意见，调整外教的教学方案，优化教学目标</h4>
+					</li>
+			    </ul>				
+			</div><br><br>
+			<div style="text-align:center;margin-top:380px"><br>
+				<button type="button" class="btn btn-danger btn-lg">免费预约体验课 ></button>
+			</div>
+		</div>
+		<!--教学质量管理体系-->
+		
+		<div id="begin-unit" style="height:600px;background:url(img/begin.jpg);background-size:100% 100%;background-color:#ffffff;">
+			<div class="unit-header" style="padding:80px">
+			    <button type="button" class="btn btn-danger btn-lg">立即预约 ></button>
+			</div>
+		</div>
+		
+		<!--底部固定-->
+		<div style="position: fixed;vertical-align: middle;" id="register" class="register-bar">
+			<div class="inner">				
+				<form class="form-inline">
+				    <b>申请免费体验</b>
+				    <div class="form-group">
+						<a href="#" id="tooltip-inputname" data-toggle="tooltip" title="孩子姓名输入有误！">
+							<input type="text" class="form-control" id="inputname" placeholder="孩子姓名">
+						</a>
+				    </div>
+				    <div class="form-group">
+						<a href="#" id="tooltip-inputmobile" data-toggle="tooltip" title="家长手机号输入有误！">
+							<input type="text" class="form-control" id="inputmobile" placeholder="家长手机号">
+						</a>
+				    </div>
+					<div class="form-group">
+						<a href="#" id="tooltip-inputpassword" data-toggle="tooltip" title="密码输入有误！">
+							<input type="password" class="form-control" id="inputpassword" placeholder="请设置6-20位的密码">
+						</a>
+				    </div>
+				    <button type="button" class="btn btn-danger" onclick="return loginsubmit()">立即申请</button>
+					<b style="font-size:14px">今日只剩64个名额</b>
+				</form>
+			</div>
+		</div>
+		<!--底部固定-->
+		
+		<!-- 底部版权信息 -->
+		<div id="footer">
+			<div id="info-foot">
+				<p>Copyright 2016 DeerMe培训平台. All rights reserved.</p>
+			</div>
+		</div>
+		<!-- /底部版权信息 --> 
+			
+		<!-- 右侧导航 -->
+		<div class="rightNav" style="z-index:9999;">
+			<a class="bigfix" target="_blank" href="http://www.apple.com/cn/"><img src="img/fix11.png" title="点击链接到苹果官网"/></a>
+			<a class="smallfix" target="_blank" href="https://www.baidu.com" style="right: -110px;"><em><img src="img/fix1.png"/></em>访问百度</a>
+			<a class="smallfix" target="_blank" href="http://www.qq.com" style="right: -110px;"><em>大</em>电话咨询</a>
+			<a class="smallfix" target="_blank" href="http://www.sina.com.cn/" style="right: -110px;"><em>本</em>访问新浪</a>
+		</div>
+		<script type="text/javascript">
+			var btb=$(".rightNav");
+			var tempS;
+			$(".rightNav").hover(function(){
+					var thisObj = $(this);
+					tempS = setTimeout(function(){
+					thisObj.find("a").each(function(i){
+						var tA=$(this);
+						setTimeout(function(){ tA.animate({right:"0"},300);},50*i);
+					});
+				},200);
+
+			},function(){
+				if(tempS){ clearTimeout(tempS); }
+				$(this).find("a").each(function(i){
+					var tA=$(this);
+					setTimeout(function(){ tA.animate({right:"-110"},300,function(){
+					});},50*i);
+				});
+
+			});
+			var isIE6 = !!window.ActiveXObject&&!window.XMLHttpRequest;
+			if( isIE6 ){ $(window).scroll(function(){ btb.css("top", $(document).scrollTop()+100) }); }
+			
+			$(function () { 
+				$('#tooltip-inputname').tooltip('hide');//input输入错误提示工具
+				$('#tooltip-inputmobile').tooltip('hide');
+				$('#tooltip-inputpassword').tooltip('hide');
+			});	
+		</script>
+	</body>
+</html>

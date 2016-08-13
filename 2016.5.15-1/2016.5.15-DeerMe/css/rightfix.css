@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+
+.rightNav{ position:fixed; width:140px;  right:0; top:35%; _position:absolute; text-align:left; cursor:pointer; background-image:url(about:blank);  }
+.rightNav .bigfix{ margin-right:110px; }
+
+.rightNav .smallfix{ opacity:.8; color:#333; text-decoration:none; outline:none;display:block; position:relative; height:30px; line-height:30px; margin-bottom:2px; background:#fff; padding-right:10px; width:140px; overflow:hidden;  cursor:pointer; right:-110px; }
+.rightNav .smallfix:hover{ color:#f00; text-decoration:underline;text-decoration:none; color:#1974A1;  }
+.rightNav .smallfix:hover em{ background:#00b700}
+.rightNav .smallfix em{ display:block; float:left; width:30px; background:#1974A1; color:#fff; font-size:16px; text-align:center; margin-right:10px;}
